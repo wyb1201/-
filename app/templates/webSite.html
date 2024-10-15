@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智析-考研政治网课分析工具</title>
+    <link type="text/css" rel="stylesheet" href="../static/plugins/ckplayer/css/ckplayer.css"/>
+    <link rel="stylesheet" href='../static/plugins/bootstrap-5.3.0-alpha1-dist/css/bootstrap.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+    <script src="../static/plugins/ckplayer/js/ckplayer.js" charset="UTF-8"></script>
+    <script src="../static/js/jquery-3.7.1.js"></script>
+    <script src="../static/plugins/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<!--header-->
+<nav class="navbar fixed-top shadow-sm p-3 nav-cus">
+    <div class="container-fluid">
+        <div class="navbar-brand mb-0 h3 border-start border-3 border-info ps-1 brand-cus">智析</div>
+        <!--        提示框-->
+        <button type="button" class="btn btn-cus" data-bs-toggle="popover"
+                data-bs-content="填写api密钥-->上传视频：可生成字幕、时间轴、大纲、脑图。右侧配有AI小智，助您顺利上岸"
+                data-bs-placement="bottom">
+            使用说明
+        </button>
+    </div>
+</nav>
+
+<!--sideBar-->
+<div class="sidebar" id="sidebar">
+
+    <!--关闭键-->
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+
+    <!--margin-->
+    <div style="height: 100px;"></div>
+
+    <!--keyInput-->
+    <label for="keyInput" class="form-label ps-4 pe-3">请输入OpenAI API密钥</label>
+    <div class="input-group ps-4 pe-3" id="keyInput">
+        <input type="text" class="form-control" placeholder="OpenAI API密钥"
+               aria-label="OpenAI API密钥" aria-describedby="button-addon2" id="key">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+            <span>保存</span>
+        </button>
+    </div>
+    <a href="https://github.com/popjane/free_chatgpt_api" class=" ps-4 pe-3">获取OpenAI API密钥</a>
+</div>
+
+<!--margin-->
+<div style="height: 74px;"></div>
+
+<!--body-->
+<div class="container-cus">
+    <div class="row g-3">
+
+        <!--left-->
+        <div class="col-md custom-col-md-7">
+
+            <!--margin-->
+            <div style="height: 7px;"></div>
+
+            <!--设置API密钥入口-->
+            <div class="text-start ps-4">
+                <button type="button" class="btn btn-link btn-sm" onclick="toggleSidebar()">上传前需设置API密钥
+                </button>
+            </div>
+
+            <!--fileInput-->
+            <div class="input-group ps-4 pe-3">
+                <input type="file" class="form-control border-info" id="input" aria-describedby="inputGroupFileAddon04"
+                       aria-label='选择文件'>
+                <button class="btn rounded-end-3 btn-info" type="button" id="filePass">
+                    <span><i class="bi bi-box-arrow-up"></i></span>
+                    <span>上传</span>
+                </button>
+            </div>
+
+            <!--margin-->
+            <div style="height: 45px;"></div>
+
+            <!--playVideo-->
+            <div class="container ps-4">
+                <div class="video mx-auto" id="vplace">
+                    <!--等待画面-->
+                    <div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel"
+                         aria-hidden="true" data-bs-backdrop="static">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="loadingModalLabel">正在生成视频...</h5>
+                                    <span style="font-size: 13px;">p.s.加载时间2~3min，下方知识点可供翻阅</span>
+                                </div>
+                                <div class="modal-body">
+                                    <!--进度条-->
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                                             role="progressbar" style="width: 100%"></div>
+                                    </div>
+                                    <div id="knowledgeCarousel" class="carousel slide mt-3" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <p>党认识和改造世界的根本要求/党的思想路线的核心/党的根本思想路线：<b>实事求是</b>
+                                                </p>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <p>
+                                                    党的生命线和根本工作路线/党永葆青春活力和战斗力的传家宝：<b>群众路线</b>
+                                                </p>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <p>党的根本政治原则：<b>独立自主</b></p>
+                                            </div>
+                                            <div class="carousel-item">
+                                                <p>党和国家的生命线/人民的幸福线：<b>党在社会主义初级阶段的基本路线</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button"
+                                                data-bs-target="#knowledgeCarousel" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                                data-bs-target="#knowledgeCarousel" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!--right-->
+        <div class="col-md custom-col-md-3 pe-4">
+
+            <!--查看脑图按钮-->
+            <div class="text-start">
+                <button type="button" class="btn btn-link btn-sm" id="generateMindmap" disabled>查看脑图
+                </button>
+            </div>
+
+            <!--脑图模态框--><!--fade:淡入-->
+            <div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <img id="generatedImage" src="" alt="脑图" style="width: 100%; height: auto;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--大纲-->
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button rounded"
+                            style="background: white; height: 45px; font-size: 15px; color: #18191C;" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseOne">
+                        大纲
+                    </button>
+                </div>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+                     aria-labelledby="panelsStayOpen-headingOne">
+                    <table class="table table-hover table-borderless" id="dg">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="col-md-3 th-cus">时间</th>
+                            <th scope="col" class="col-md-9 th-cus">内容</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--margin-->
+            <div style="height: 13px"></div>
+
+            <!--ai答疑-->
+            <div style="font-size: 18px;"><i class="bi bi-robot" style="color: #0dcaf0;"></i>
+                <span style="margin-left: 2px;">小智问答</span>
+            </div>
+            <div id='ai' class="my-1 pt-3 p-2">
+                <div id="chatbox" class="px-2 pb-2">
+                    <!-- 聊天记录 -->
+                    <div class="ai-message"><strong>小智：<br></strong>你好！我是小智😉<br>请尽情提出有关考研政治的问题，我将尽我所能帮您解答🤓
+                    </div>
+                </div>
+                <div class="input-group mt-2">
+                    <input type="text" id="userInput" class="form-control" placeholder="请输入您的问题">
+                    <button class="btn btn-outline-info" id="sendBtn">发送</button>
+                </div>
+                <div id="intro">所有内容仅由AI生成仅供参考</div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer mt-5 bg-light text-center text-lg-start">
+            <div class="container p-4">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <h5 class="text-uppercase">关于我们</h5>
+                        <p>
+                            智析致力于为您提供高质量的在线学习资源与支持，帮助您更好地掌握知识和技能。<br>
+                            如您有宝贵的建议或意见可联系：xxxxxxx@qq.com
+                        </p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="text-uppercase">链接</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="http://yzst.chsi.com.cn/">中国研究生招生信息网</a></li>
+                            <li><a href="https://kaoyan.eol.cn/shiti/zhengzhi/">历年政治真题</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5 class="text-uppercase">关注我们</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#!">GitHub</a></li>
+                            <li><a href="#!">微信公众号</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+<!--密钥成功保存弹出窗-->
+<div class="toast" id="successToast" style="position: fixed; top: 50px; left: 20px; display: none;z-index: 1200;">
+    <div class="d-flex">
+        <div class="toast-body">
+            API 密钥已成功保存！
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+
+</div>
+
+<script src="../static/js/scripts.js"></script>
+
+</body>
+</html>

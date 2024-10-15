@@ -1,0 +1,140 @@
+
+body {
+    background-color: #f2f2f2;
+}
+
+.nav-cus {
+    height: 64px;
+    background-color: white;
+}
+
+.sidebar {
+    width: 500px;
+    background-color: rgba(51, 51, 51, 0.9);
+    color: white;
+    position: fixed;
+    height: 100%;
+    left: -500px;
+    transition: left 0.3s;
+    z-index: 1000;
+    padding: 15px;
+    margin-top: 64px;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.close-btn {
+    background-color: transparent; /*透明*/
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer; /*手型光标*/
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.brand-cus {
+    font-family: SimSun;
+    font-weight: bold;
+}
+
+.th-cus {
+    font-weight: lighter;
+    font-size: 13px;
+    color: #61666D;
+}
+
+.video {
+    position: relative;
+    height: 540px;
+    background: white;
+}
+
+.ckplayer-prompt {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    display: none; /* Initially hidden */
+}
+
+.container-cus {
+    width: 1380px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.btn-cus {
+    border-color: #FB7299;
+    color: #FB7299;
+    --bs-btn-hover-border-color: #FB7299;
+    --bs-btn-hover-color: rgb(253, 163, 188);
+    --bs-btn-active-color: rgb(253, 163, 188);
+    --bs-btn-active-border-color: #FB7299;
+}
+
+.user-message {
+    background-color: #d1e7dd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 14px;
+    overflow-wrap: break-word;
+}
+
+.ai-message {
+    background-color: #f8d7da;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 14px;
+    overflow-wrap: break-word;
+}
+
+.row {
+    display: flex;
+}
+
+.custom-col-md-7 {
+    flex: 0 0 71%;
+    max-width: 71%;
+    display: flex;
+    flex-direction: column; /* 使内容垂直排列 */
+}
+
+.custom-col-md-3 {
+    flex: 0 0 29%;
+    max-width: 29%;
+    /*min-height: 800px;*/
+}
+
+#ai {
+    background-color: white;
+    min-height: 500px;
+}
+
+#chatbox {
+    flex-grow: 1; /* 允许它根据内容扩展 */
+    min-height: 450px; /* 确保有最小高度 */
+    max-height: 4500px; /* 限制最大高度 */
+    overflow-y: auto; /* 确保有滚动条 */
+    background-color: white; /* 确保背景颜色 */
+}
+
+#panelsStayOpen-collapseOne {
+    overflow: auto;
+    max-height: 200px;
+}
+
+#intro {
+    color: rgba(0, 0, 0, 0.26);
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    margin-top: 4px;
+}

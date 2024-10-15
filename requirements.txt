@@ -1,0 +1,19 @@
+﻿faster-whisper==1.0.3
+ffmpeg-python==0.2.0
+opencc-python-reimplemented==0.1.7
+pysrt==1.1.2
+langchain_openai==0.2.2
+langchain_core==0.3.9
+pydantic==2.9.2
+langchain==0.3.2
+Flask==3.0.3
+matplotlib
+network
+requests
+lxml
+
+# PyTorch 需要手动安装，请根据环境选择合适的版本：
+# CPU 版本:
+# pip install torch --index-url https://download.pytorch.org/whl/cpu
+# GPU 版本:
+# 请访问 https://pytorch.org 获取安装命令
