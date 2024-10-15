@@ -1,3 +1,5 @@
+### 政治考研网课视频智能分析总结web
+
 ## 项目亮点
 
 1. **GPU 加速**：在支持 GPU（NVIDIA CUDA）的环境下，使用 GPU 加速 `faster-whisper` 模型的语音转录及 FFmpeg 的视频编码，显著提升处理效率。
